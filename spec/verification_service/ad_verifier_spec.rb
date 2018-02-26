@@ -4,8 +4,7 @@ describe AdVerifier do
   let(:verification_response) { described_class.new(campaigns, ads).call }
 
   context 'discrepancies' do
-    let(:discrepancies) { verification_response.fetch(:discrepancies) }
-    let(:discrepancy)   { discrepancies.find { |d| d.fetch(:campaign_id) == campaigns.first.id } }
+    let(:discrepancy) { verification_response.discrepancies.find { |d| d.fetch(:campaign_id) == campaigns.first.id } }
 
     context 'status' do
       let(:status_discrepancy) { discrepancy.fetch(:discrepancies).find { |d| d[:status] } }
@@ -133,7 +132,7 @@ describe AdVerifier do
     let(:ads) { [] }
 
     it 'adds such campaigns to campaigns_without_ads' do
-      expect(verification_response.fetch(:campaigns_without_ads)).to match_array [
+      expect(verification_response.campaigns_without_ads).to match_array [
         { id: '1', job_id: '1', status: 'active', external_reference: '1', ad_description: 'Description for campaign 11' },
         { id: '2', job_id: '2', status: 'paused', external_reference: '2', ad_description: 'Description for campaign 12' }
       ]
@@ -151,7 +150,7 @@ describe AdVerifier do
     end
 
     it 'adds such ads to ads_without_campaings' do
-      expect(verification_response.fetch(:ads_without_campaings)).to match_array [
+      expect(verification_response.ads_without_campaings).to match_array [
         { reference: '1', status: 'enabled',  description: 'Description for campaign 11' },
         { reference: '2', status: 'disabled', description: 'Description for campaign 12' }
       ]

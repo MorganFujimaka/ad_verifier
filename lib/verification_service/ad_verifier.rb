@@ -11,11 +11,11 @@ class AdVerifier
   end
 
   def call
-    {
+    AdVerificationResponse.new(
       discrepancies:         discrepancies,
       campaigns_without_ads: campaigns_without_ads.map(&:to_h),
       ads_without_campaings: ads_without_campaings.map(&:to_h)
-    }
+    )
   end
 
   private

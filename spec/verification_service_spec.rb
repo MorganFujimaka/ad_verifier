@@ -13,15 +13,15 @@ describe VerificationService do
     end
 
     it 'verifies campaigns and ads' do
-      expect(verification_response.fetch(:campaigns_without_ads)).to match_array [
+      expect(verification_response.campaigns_without_ads).to match_array [
         { id: '4', job_id: '4', external_reference: '4', status: 'deleted', ad_description: 'Description for campaign 14' }
       ]
 
-      expect(verification_response.fetch(:ads_without_campaings)).to match_array [
+      expect(verification_response.ads_without_campaings).to match_array [
         { reference: '3', status: 'enabled', description: 'Description for campaign 13' }
       ]
 
-      expect(verification_response.fetch(:discrepancies)).to match_array [
+      expect(verification_response.discrepancies).to match_array [
         {
           campaign_id:   '1',
           ad_reference:  '1',
